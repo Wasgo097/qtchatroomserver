@@ -6,6 +6,7 @@
 #include <QTcpServer>
 #include <QVector>
 #include <utility>
+#include "mythread.h"
 namespace Ui {
 class MainWindow;
 }
@@ -18,14 +19,14 @@ public:
 private slots:
     void on_radioButton_clicked();
     void newConnection();
-    void redirection(QTcpSocket * target,const char * data);
-    void readyRead();
+    //void redirection(QTcpSocket * target,const char * data);
+    //void readyRead();
 private:
     Ui::MainWindow *ui;
     QTcpServer * server{nullptr};
-    QVector<QTcpSocket*> connections;
-    QVector<QTcpSocket*> waiting_room;
-    QVector<std::pair<QTcpSocket*,QTcpSocket*>> talks;
+    QVector<std::pair<int,QTcpSocket*>> connections;
+    QVector<std::pair<int,QTcpSocket*>> waiting_room;
+    QVector<MyThread> talks;
     bool server_status=false;
 };
 #endif // MAINWINDOW_H

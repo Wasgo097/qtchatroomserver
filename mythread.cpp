@@ -1,7 +1,9 @@
 #include "mythread.h"
-MyThread::MyThread(int id,QObject *parent):
+MyThread::MyThread(std::pair<int,QTcpSocket*> firstsocket,std::pair<int,QTcpSocket*> secondtsocket,QObject * parent):
     QThread (parent),
-    socket_descriptor{id}{
+    firstsocket(firstsocket),
+    secondtsocket(secondtsocket){
+
 }
 void MyThread::run(){
     qDebug()<<"Sterting thread";
