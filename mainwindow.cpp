@@ -36,7 +36,10 @@ void MainWindow::on_radioButton_clicked()
         //ui->countusers->setText("Liczba uzytkownikow: 0");
         //ui->countwaiting->setText("Liczba oczekujacych: 0");
         delete server;
+        server=nullptr;
         connections.clear();
+        waiting_room.clear();
+        talks.clear();
     }
 }
 void MainWindow::newConnection()
