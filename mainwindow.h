@@ -1,13 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QMainWindow>
-#include <QDebug>
-#include <QTcpSocket>
 #include <QTcpServer>
+#include <QTcpSocket>
 #include <QVector>
-#include <utility>
-#include <memory>
-#include "mythread.h"
 namespace Ui {
 class MainWindow;
 }
@@ -23,9 +19,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTcpServer * server{nullptr};
-    QVector<std::shared_ptr<QTcpSocket>> connections;
-    QVector<std::shared_ptr<QTcpSocket>> waiting_room;
-    QVector<std::unique_ptr<MyThread>> talks;
+    QVector<QTcpSocket *> connections;
+    QVector<QTcpSocket *> waiting_room;
+    //QVector<MyThread *> talks;
     bool server_status=false;
 };
 #endif // MAINWINDOW_H

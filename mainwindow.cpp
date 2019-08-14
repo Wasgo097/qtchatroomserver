@@ -12,7 +12,13 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    if(server!=nullptr)delete server;
+//    if(server!=nullptr)delete server;
+//    for(auto &x:connections)delete x;
+//    connections.clear();
+//    for(auto &x:waiting_room)delete x;
+//    waiting_room.clear();
+    //for(auto&x:talks)delete x;
+    //talks.clear();
 }
 void MainWindow::on_radioButton_clicked()
 {
@@ -32,22 +38,21 @@ void MainWindow::on_radioButton_clicked()
     }
     else{
         ui->serverstatus->setText("Serwer off");
-        //ui->counttalks->setText("Liczba rozmow: 0");
-        //ui->countusers->setText("Liczba uzytkownikow: 0");
-        //ui->countwaiting->setText("Liczba oczekujacych: 0");
-        delete server;
-        server=nullptr;
+        ui->counttalks->setText("Liczba rozmow: 0");
+        ui->countusers->setText("Liczba uzytkownikow: 0");
+        ui->countwaiting->setText("Liczba oczekujacych: 0");
+        if(server!=nullptr)delete server;
+        for(auto &x:connections)delete x;
         connections.clear();
+        for(auto &x:waiting_room)delete x;
         waiting_room.clear();
-        talks.clear();
+        //for(auto&x:talks)delete x;
+        //talks.clear();
     }
 }
 void MainWindow::newConnection()
 {
-    //QTcpServer * temp_socket=server->nextPendingConnection();
-    //connections.push_back(std::make_pair())
-    //connections.push_back(server->nextPendingConnection());
-    waiting_room.push_back(connections.last());
+    /*
 //    connections.last()->write("Witamy\r\n");
 //    if(waiting_room.size()==2){
 //        talks.push_back(std::make_pair(waiting_room[0],waiting_room[1]));
@@ -57,8 +62,17 @@ void MainWindow::newConnection()
 //        connect(talks.last().second,SIGNAL(readyRead()),this,SLOT(readyRead()));
 //        waiting_room.clear();
 //    }
+    */
+    connections.push_back(server->nextPendingConnection());
+    waiting_room.push_back(connections.last());
+    if(waiting_room.size()==2){
+        //MyThread * thread=new MyThread(waiting_room[0],waiting_room[1],this);
+        //MyThread * thread=new MyThread(this);
+        //talks.push_back(thread);
+        waiting_room.clear();
+    }
     qDebug()<<"New connection current size of connections = "<<connections.size()<<", current size of waiting room = "<<
-              waiting_room.size()<<", current size of talking = "<<talks.size();
+              waiting_room.size()<<", current size of talking = ";//<<talks.size();
 }
 /*
 //void MainWindow::redirection(QTcpSocket * target,const char * data)
