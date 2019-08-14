@@ -26,10 +26,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    talkthread.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    talkthread.h
 
 FORMS += \
         mainwindow.ui

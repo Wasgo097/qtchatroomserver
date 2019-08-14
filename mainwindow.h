@@ -4,6 +4,7 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QVector>
+#include "talkthread.h"
 namespace Ui {
 class MainWindow;
 }
@@ -21,7 +22,7 @@ private:
     QTcpServer * server{nullptr};
     QVector<QTcpSocket *> connections;
     QVector<QTcpSocket *> waiting_room;
-    //QVector<MyThread *> talks;
+    QVector<TalkThread *> talks;
     bool server_status=false;
 };
 #endif // MAINWINDOW_H

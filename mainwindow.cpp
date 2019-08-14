@@ -12,13 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-//    if(server!=nullptr)delete server;
-//    for(auto &x:connections)delete x;
-//    connections.clear();
-//    for(auto &x:waiting_room)delete x;
-//    waiting_room.clear();
-    //for(auto&x:talks)delete x;
-    //talks.clear();
 }
 void MainWindow::on_radioButton_clicked()
 {
@@ -46,8 +39,8 @@ void MainWindow::on_radioButton_clicked()
         connections.clear();
         for(auto &x:waiting_room)delete x;
         waiting_room.clear();
-        //for(auto&x:talks)delete x;
-        //talks.clear();
+        for(auto&x:talks)delete x;
+        talks.clear();
     }
 }
 void MainWindow::newConnection()
@@ -69,6 +62,7 @@ void MainWindow::newConnection()
         //MyThread * thread=new MyThread(waiting_room[0],waiting_room[1],this);
         //MyThread * thread=new MyThread(this);
         //talks.push_back(thread);
+        talks.push_back(new TalkThread(waiting_room[0],waiting_room[1],this));
         waiting_room.clear();
     }
     qDebug()<<"New connection current size of connections = "<<connections.size()<<", current size of waiting room = "<<
