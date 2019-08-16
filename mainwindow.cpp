@@ -1,20 +1,18 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "talkthread.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
+    ui(new Ui::MainWindow){
     ui->setupUi(this);
     ui->menuBar->hide();
     ui->statusBar->hide();
     ui->mainToolBar->hide();
 }
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow(){
     delete ui;
 }
-void MainWindow::on_radioButton_clicked()
-{
+void MainWindow::on_radioButton_clicked(){
     server_status=!server_status;
     if(server_status==true){
         ui->counttalks->setText("Liczba rozmow: 0");
@@ -59,14 +57,11 @@ void MainWindow::newConnection()
     connections.push_back(server->nextPendingConnection());
     waiting_room.push_back(connections.last());
     if(waiting_room.size()==2){
-        //MyThread * thread=new MyThread(waiting_room[0],waiting_room[1],this);
-        //MyThread * thread=new MyThread(this);
-        //talks.push_back(thread);
         talks.push_back(new TalkThread(waiting_room[0],waiting_room[1],this));
         waiting_room.clear();
     }
     qDebug()<<"New connection current size of connections = "<<connections.size()<<", current size of waiting room = "<<
-              waiting_room.size()<<", current size of talking = ";//<<talks.size();
+              waiting_room.size()<<", current size of talking = "<<talks.size();
 }
 /*
 //void MainWindow::redirection(QTcpSocket * target,const char * data)

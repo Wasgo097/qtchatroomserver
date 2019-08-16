@@ -4,10 +4,10 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QVector>
-#include "talkthread.h"
 namespace Ui {
 class MainWindow;
 }
+class TalkThread;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
