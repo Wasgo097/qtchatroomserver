@@ -56,12 +56,16 @@ void MainWindow::newConnection()
     */
     connections.push_back(server->nextPendingConnection());
     waiting_room.push_back(connections.last());
+    waiting_room.last()->write("Witaj \r\n");
+    qDebug()<<"Nowy host";
     if(waiting_room.size()==2){
         talks.push_back(new TalkThread(waiting_room[0],waiting_room[1],this));
+        talks.last()->start();
         waiting_room.clear();
+        qDebug()<<"Nowa rozmowa";
     }
-    qDebug()<<"New connection current size of connections = "<<connections.size()<<", current size of waiting room = "<<
-              waiting_room.size()<<", current size of talking = "<<talks.size();
+//    qDebug()<<"New connection current size of connections = "<<connections.size()<<", current size of waiting room = "<<
+//              waiting_room.size()<<", current size of talking = "<<talks.size();
 }
 /*
 //void MainWindow::redirection(QTcpSocket * target,const char * data)

@@ -6,4 +6,22 @@ TalkThread::TalkThread(QTcpSocket *fsocket, QTcpSocket *ssocket,QObject * parent
 }
 void TalkThread::run(){
     qDebug()<<"Starting thread";
+    connect(talk.first,SIGNAL(readyRead()),this,SLOT(secondread()),Qt::DirectConnection);
+    connect(talk.second,SIGNAL(readyRead()),this,SLOT(firstread()),Qt::DirectConnection);
+    exec();
+}
+void TalkThread::firstread(){
+    qDebug()<<"Pierwszy czyta";
+    while(talk.second->canReadLine()){
+        talk.first->write(talk.second->readLine());
+        qDebug()<<talk.second->readLine();
+    }
+}
+
+void TalkThread::secondread(){
+    qDebug()<<"Drugi czyta";
+    while(talk.first->canReadLine()){
+        qDebug()<<talk.first->readLine();
+        talk.second->write(talk.first->readLine());
+    }
 }

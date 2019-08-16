@@ -9,8 +9,11 @@ class TalkThread : public QThread
     Q_OBJECT
 public:
     explicit TalkThread(QObject * parent=nullptr);
-    inline TalkThread(QTcpSocket * fsocket,QTcpSocket * ssocket,QObject * parent=nullptr);
+    TalkThread(QTcpSocket * fsocket,QTcpSocket * ssocket,QObject * parent=nullptr);
     void run();
+public slots:
+    void firstread();
+    void secondread();
 private:
     std::pair<QTcpSocket *,QTcpSocket*> talk;
 };
