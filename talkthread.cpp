@@ -14,14 +14,14 @@ void TalkThread::firstread(){
     qDebug()<<"Pierwszy czyta";
     while(talk.second->canReadLine()){
         talk.first->write(talk.second->readLine());
-        qDebug()<<talk.second->readLine();
+        //qDebug()<<talk.second->readLine();
     }
 }
 
 void TalkThread::secondread(){
     qDebug()<<"Drugi czyta";
     while(talk.first->canReadLine()){
-        qDebug()<<talk.first->readLine();
+        //qDebug()<<talk.first->readLine();
         talk.second->write(talk.first->readLine());
     }
 }
