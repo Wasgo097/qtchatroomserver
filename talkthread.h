@@ -14,6 +14,7 @@ public:
 public slots:
     void firstread();
     void secondread();
+    void quit_talk();
 private:
     std::pair<QTcpSocket *,QTcpSocket*> talk;
 };
