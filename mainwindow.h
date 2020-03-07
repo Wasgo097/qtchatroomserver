@@ -17,6 +17,8 @@ public:
     ~MainWindow();
 private slots:
     void newConnection();
+    void clear_thread();
+    void clear_socket();
 private:
     Ui::MainWindow *ui;
     std::shared_ptr<QTcpServer> server;
